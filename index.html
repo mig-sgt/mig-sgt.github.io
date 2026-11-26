@@ -136,6 +136,25 @@ footer img{width:110px;height:auto;margin:0 auto;opacity:.9}
   .want .sloop{font-size:28px}.want .kudry{font-size:18px}
   .tab{padding:0 18px;font-size:13px}
 }
+
+/* figures in stock */
+.figs{position:relative;padding-bottom:50px}
+.figs .lead a,.catalog .tofigs{color:var(--terra)}
+.tofigs{display:block;text-align:center;margin:22px auto 0;font:400 clamp(17px,2.6vw,20px) 'Playfair',serif;position:relative;z-index:1}
+.fsearch{display:block;width:min(420px,100%);margin:28px auto 30px;min-height:50px;padding:0 22px;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,255,255,.6);font:400 16px 'Playfair',serif;color:var(--choc);position:relative;z-index:1}
+.fsearch:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+.fgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px 18px;position:relative;z-index:1}
+.fig{display:flex;flex-direction:column;align-items:center;text-align:center}
+.fig .ph{width:100%;aspect-ratio:1/1;border-radius:26px;overflow:hidden;background:#fff;display:grid;place-items:center}
+.fig .ph img{width:100%;height:100%;object-fit:contain}
+.fig .noimg{font-size:14px;color:var(--beige)}
+.fig h3{font-family:'Kudry',serif;font-weight:400;font-size:clamp(17px,2.6vw,21px);line-height:1.2;margin:12px 0 2px;text-wrap:balance}
+.fig .size{margin:0 0 12px;font-size:15px;color:#8a6a58}
+.fig .want{min-height:46px;max-width:200px}
+.fig .want .sloop{font-size:28px}.fig .want .kudry{font-size:18px}
+.fstate{text-align:center;margin:10px auto 0;font-size:18px;position:relative;z-index:1}
+@media(max-width:860px){.fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.fgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 /* gif-like hand-drawn sparkles */
 .spark svg .f{opacity:0;animation:frame .75s steps(1,end) infinite}
@@ -186,6 +205,23 @@ footer img{width:110px;height:auto;margin:0 auto;opacity:.9}
     <div class="grid" id="grid"></div>
     <p class="note">Цена указана за набор без учёта доставки.<br>Минимальная сумма для заказа — 2 000 ₽</p>
     <p class="facts"><span>Доставка по городу 350 ₽</span><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg><span>Самовывоз Тюменский тракт, 19</span></p>
+    <a class="tofigs" href="#figures">Смотреть фигуры в наличии ↓</a>
+  </div>
+</section>
+
+<section class="figs" id="figures">
+  <div class="wrap">
+    <span class="spark" style="right:-8px;top:60px;width:90px;height:110px" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg></span>
+    <span class="spark" style="left:-6px;top:55%;width:80px;height:96px" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg></span>
+    <div class="title">
+      <span class="bgw sloop" aria-hidden="true">В наличии</span>
+      <h2 class="kudry">ФИГУРЫ</h2>
+    </div>
+    <p class="lead">выберите шар — соберём композицию<br>под ваш праздник и бюджет</p>
+    <input class="fsearch" id="fsearch" type="search" placeholder="Найти: единорог, звезда, 5…" aria-label="Поиск по фигурам">
+    <div class="fgrid" id="fgrid"></div>
+    <p class="fstate" id="fstate">Загружаем фигуры…</p>
+    <p class="note">Здесь только то, что сейчас есть в мастерской.<br>Не нашли нужную? <a href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener" style="color:var(--terra)">Напишите нам</a></p>
   </div>
 </section>
 
@@ -309,6 +345,47 @@ footer img{width:110px;height:auto;margin:0 auto;opacity:.9}
 </script>
 
 
+<script>
+{
+  const API = 'https://script.google.com/macros/s/AKfycbyfZ2l_rE-ZYYQ-aVZDaJk902BKaZdVL8u0kuyReDhoDGLoEIbw1rpdAXxz1el1yms-rw/exec';
+  const BOT = 'mig_sgt_bot';
+  const SHOW = ['Фигуры'];
+  const KEY = 'mig-figs';
+  const grid = document.getElementById('fgrid'), state = document.getElementById('fstate'), q = document.getElementById('fsearch');
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const norm = s => String(s || '').toLowerCase().replace(/ё/g, 'е');
+  let all = [];
+  const pic = it => it.thumb || it.photo || (it.driveId ? 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(it.driveId) + '&sz=w600' : '');
+  const safeUrl = u => /^https:\/\//.test(u) ? u : '';
+  function pickList(d){
+    const arr = Array.isArray(d) ? d : (d && (d.items || d.data || d.figures)) || [];
+    const only = arr.filter(it => it && it.name && SHOW.includes(String(it.category || '').trim()));
+    return only.length ? only : arr.filter(it => it && it.name);
+  }
+  function render(){
+    const s = norm(q.value.trim());
+    const list = s ? all.filter(it => norm(it.name + ' ' + (it.size || '')).includes(s)) : all;
+    grid.innerHTML = list.map(it => {
+      const src = safeUrl(pic(it));
+      const want = 'https://t.me/' + BOT + '?start=fig_' + encodeURIComponent(it.id || '');
+      return '<article class="fig"><div class="ph">' +
+        (src ? '<img loading="lazy" src="' + esc(src) + '" alt="' + esc(it.name) + '">' : '<span class="noimg">Фото скоро будет</span>') +
+        '</div><h3>' + esc(it.name) + '</h3>' + (it.size ? '<p class="size">' + esc(it.size) + '</p>' : '<p class="size"></p>') +
+        '<a class="want" href="' + esc(want) + '" target="_blank" rel="noopener"><span class="sloop">Х</span><span class="kudry">очу эту</span></a></article>';
+    }).join('');
+    state.textContent = list.length ? '' : (all.length ? 'Ничего не нашли — попробуйте другое слово' : state.textContent);
+    state.hidden = !state.textContent;
+  }
+  q.addEventListener('input', render);
+  try { const c = JSON.parse(localStorage.getItem(KEY) || 'null'); if (c) { all = pickList(c); render(); } } catch(e) {}
+  fetch(API, {redirect:'follow'}).then(r => r.json()).then(d => {
+    all = pickList(d);
+    try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e) {}
+    if (!all.length) state.textContent = 'Сейчас фигур в наличии нет — напишите, подберём под заказ';
+    render();
+  }).catch(() => { if (!all.length) { state.textContent = 'Не удалось загрузить список. Обновите страницу или напишите нам'; state.hidden = false; } });
+}
+</script>
 <script>
 {
   const base=[[12,0],[12.5,9,13.8,11,19,12],[13.8,13,12.5,15,12,24],[11.5,15,10.2,13,5,12],[10.2,11,11.5,9,12,0]];
