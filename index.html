@@ -5,271 +5,252 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Миг — студия воздушных шаров, Сургут</title>
 <meta name="description" content="Студия воздушных шаров «Миг» в Сургуте: наборы на выписку, детские и взрослые праздники. Доставка по городу 350 ₽.">
-<meta name="theme-color" content="#AF5A38">
+<meta name="theme-color" content="#B05C3B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* VOICE: нежный, винтажный, бережный — «внутри чей-то праздник»
-   IDEA: витрина-открытка: бумага, рукописные акценты, работы как подарки
-   PICTURE: фото работы на весь первый экран, поверх — логотип и огромное рукописное «Миг»
-   COLOUR and TYPE: молоко и бумага, терракота, оливка, пыльная роза; Kudry — заголовки, Sloop Script — акценты, Playfair — текст
-   LAYOUT: обложка → каталог с вкладками → цитата → как заказать → вопросы → контакты; на телефоне кнопка заказа внизу */
+/* VOICE: нежный, бережный, «внутри чей-то праздник»
+   IDEA: открытка: розовая бумага, волнистые края, звёздочки, рукописные слова
+   PICTURE: фото работы на весь первый экран с логотипом; фото в арках
+   COLOUR and TYPE: пудрово-розовый, шоколад, терракота, бежевый; Kudry — заголовки и названия, Sloop — рукописное, Playfair — текст
+   LAYOUT: обложка → каталог → цитата → как заказать → вопросы → фото → контакты */
 @font-face{font-family:'Kudry';src:url('fonts/kudry.woff') format('woff');font-display:swap}
 @font-face{font-family:'Sloop';src:url('fonts/sloop.woff') format('woff');font-display:swap}
 @font-face{font-family:'Playfair';src:url('fonts/playfair.woff') format('woff');font-weight:400 900;font-display:swap}
 :root{
-  --milk:#F4ECE1;--paper:#FBF7F1;--terra:#AF5A38;--terra-dark:#8A4429;
-  --olive:#6F7045;--rose:#D9A9A0;--rose-soft:#EFD9D2;--ink:#3B2A22;--muted:#7A6559;--line:rgba(59,42,34,.18);
+  --pink:#F6E2EA;--choc:#3B2016;--terra:#B05C3B;--beige:#D9BC9F;--line:#DFC6AF;--cream:#FBF6F1;--star:#FBF0F4;
 }
 *{box-sizing:border-box;min-width:0}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{margin:0;background:var(--milk);color:var(--ink);font:17px/1.65 'Playfair',Georgia,serif;overflow-x:clip}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--pink);color:var(--choc);font:18px/1.55 'Playfair',Georgia,serif;overflow-x:clip}
 a{color:inherit}
 img{display:block;max-width:100%}
-.wrap{max-width:1160px;margin:0 auto;padding:0 max(5vw,18px)}
-.band{padding:clamp(56px,8vw,112px) 0;position:relative}
-.caps{font-family:'Kudry','Playfair',serif;text-transform:uppercase;letter-spacing:.02em;font-weight:400;line-height:1.05;margin:0}
-.script{font-family:'Sloop','Playfair',serif;font-weight:400;line-height:1}
-.title{text-align:center;margin-bottom:clamp(28px,4vw,48px);position:relative;padding-top:clamp(18px,3vw,36px)}
-.title .script{position:absolute;left:50%;top:0;transform:translateX(-50%) rotate(-4deg);color:var(--terra);opacity:.16;font-size:clamp(76px,13vw,160px);white-space:nowrap;pointer-events:none;z-index:0}
-.title .caps,.title p{position:relative;z-index:1}
-.title .caps{font-size:clamp(30px,4.6vw,52px)}
-.title p{color:var(--muted);max-width:34em;margin:14px auto 0}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px;position:relative}
+.kudry{font-family:'Kudry','Playfair',serif;font-weight:400}
+.sloop{font-family:'Sloop','Playfair',serif;font-weight:400}
+.hy{font-family:'Playfair',serif;font-size:.55em;vertical-align:.25em}
+.center{text-align:center}
 
-/* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 28px;border-radius:999px;font:600 15px/1 'Playfair',serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1.5px solid transparent;transition:background .2s,color .2s}
-.btn:focus-visible,.tab:focus-visible,summary:focus-visible{outline:2px solid var(--olive);outline-offset:3px}
-.btn-terra{background:var(--terra);color:var(--paper)}
-.btn-terra:hover{background:var(--terra-dark)}
-.btn-ghost{border-color:currentColor;color:var(--paper)}
-.btn-ghost:hover{background:rgba(251,247,241,.14)}
+/* scallops */
+.scal-top{height:34px;margin-top:-34px;position:relative;z-index:2;background:radial-gradient(circle at 50% 100%,var(--c) 33px,transparent 34px) 0 0/68px 34px repeat-x}
+.scal-bottom{height:34px;position:relative;z-index:2;background:radial-gradient(circle at 50% 0,var(--c) 33px,transparent 34px) 0 0/68px 34px repeat-x}
 
-/* header */
-header{position:fixed;inset:0 0 auto;z-index:20;transition:background .3s,box-shadow .3s}
-header.solid{background:rgba(244,236,225,.95);backdrop-filter:blur(8px);box-shadow:0 1px 0 var(--line)}
-.bar{display:flex;align-items:center;gap:28px;height:68px}
-.bar .logo img{height:38px;width:auto}
-.bar .logo .dark{display:none}
-header.solid .logo .light{display:none}
-header.solid .logo .dark{display:block}
-nav{display:flex;gap:26px;margin-left:auto;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
-nav a{text-decoration:none;color:var(--paper);opacity:.9}
-header.solid nav a{color:var(--ink)}
-nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:6px}
-.bar .btn{min-height:42px;padding:0 20px;font-size:13px}
+/* sparkles */
+.spark{position:absolute;color:#FFFFFF;opacity:.5;pointer-events:none;z-index:0}
+.spark svg{display:block;width:100%;height:100%}
 
 /* hero */
-.hero{position:relative;min-height:min(100svh,880px);display:grid;place-items:center;text-align:center;color:var(--paper);overflow:hidden;background:#5a3a2c}
+.hero{position:relative;min-height:min(100svh,920px);display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;color:var(--cream);overflow:hidden;background:#5b4540}
 .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,24,16,.45) 0%,rgba(40,24,16,.15) 35%,rgba(40,24,16,.55) 65%,rgba(40,24,16,.85) 100%)}
-.ghost{position:absolute;z-index:1;top:8%;left:50%;transform:translateX(-50%) rotate(-6deg);font-size:clamp(180px,34vw,460px);color:rgba(251,247,241,.12);white-space:nowrap;pointer-events:none}
-.hero-in{position:relative;z-index:2;padding:160px 20px 72px;justify-content:flex-end;min-height:min(100svh,880px);display:flex;flex-direction:column;align-items:center}
-.hero-in .logo-big{width:min(420px,72vw);height:auto}
-.hero-in .sub{font-weight:400;text-transform:uppercase;letter-spacing:.16em;font-size:clamp(14px,1.6vw,17px);margin:0 0 6px;line-height:1.5}
-.hero-in .tag{font-size:clamp(44px,7vw,84px);margin:10px 0 30px}
-.hero-in .facts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin:0 0 34px;padding:0;list-style:none;font-size:15px;opacity:.92}
-.hero-in .facts li::before{content:"✦ ";color:var(--rose)}
-.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
-.torn{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:40px;z-index:3;color:var(--milk)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,25,20,.35),rgba(40,25,20,.2) 35%,rgba(40,25,20,.45) 70%,rgba(40,25,20,.6))}
+.hero-top,.hero-bottom{position:relative;z-index:1;padding:0 18px;width:100%}
+.hero-top{padding-top:clamp(28px,6vh,56px)}
+.hero-top img{width:min(210px,44vw);height:auto;margin:0 auto}
+.hero-bottom{padding-bottom:clamp(64px,10vh,96px);display:flex;flex-direction:column;align-items:center}
+.hero h1{font-weight:400;font-size:clamp(20px,3.4vw,28px);margin:0 0 4px;letter-spacing:.01em}
+.hero h1 .dot{font-size:.7em;vertical-align:.12em;margin:0 .3em}
+.hero .tag{font-size:clamp(48px,8.5vw,84px);line-height:1.05;margin:0 0 32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 34px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;transition:background .2s,color .2s;font:400 clamp(17px,2.4vw,20px)/1 'Playfair',serif;text-transform:uppercase;letter-spacing:.02em}
+.btn:focus-visible,.tab:focus-visible,summary:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+.hero .btn{width:min(340px,82vw);margin-bottom:14px}
+.btn-terra{background:var(--terra);color:var(--cream)}
+.btn-terra:hover{background:#94472c}
+.btn-ghost{border-color:var(--line);color:var(--cream)}
+.btn-ghost:hover{background:rgba(251,246,241,.12)}
+
+/* section titles: faded script behind */
+.title{position:relative;text-align:center;padding-top:clamp(40px,9vw,70px);margin-bottom:8px}
+.title .bgw{position:absolute;left:50%;top:0;transform:translateX(-58%);color:var(--beige);font-size:clamp(64px,13vw,112px);line-height:1;white-space:nowrap;opacity:.9;pointer-events:none;z-index:0}
+.title h2{position:relative;z-index:1;margin:0;font-size:clamp(44px,9vw,76px);line-height:1}
+.lead{position:relative;z-index:1;text-align:center;font-size:clamp(19px,3vw,23px);margin:14px auto 0;max-width:22em}
 
 /* catalog */
-.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:40px}
-.tab{min-height:44px;padding:0 22px;border-radius:999px;border:1px solid var(--line);background:transparent;font:500 14px 'Playfair',serif;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);cursor:pointer}
-.tab[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:clamp(18px,2.5vw,32px)}
-.card{background:var(--paper);padding:14px 14px 22px;display:flex;flex-direction:column;text-align:center;box-shadow:0 18px 40px -28px rgba(59,42,34,.45)}
-.card .ph{aspect-ratio:4/5;overflow:hidden;border-radius:999px 999px 4px 4px;background:var(--rose-soft)}
-.card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
-.card:hover img{transform:scale(1.04)}
-.card .cat{font-family:'Sloop',serif;color:var(--terra);font-size:26px;margin:16px 0 0;line-height:1}
-.card h3{font-weight:600;font-size:19px;line-height:1.3;margin:6px 0 10px;text-wrap:balance}
-.card .price{font-style:italic;font-size:19px;color:var(--muted);margin-bottom:16px;white-space:nowrap}
-.card .btn{margin-top:auto;align-self:center;min-height:44px;padding:0 22px;font-size:13px;background:transparent;border-color:var(--terra);color:var(--terra)}
-.card .btn:hover{background:var(--terra);color:var(--paper)}
-.note{text-align:center;color:var(--muted);font-size:15px;margin-top:32px}
+.catalog{position:relative;padding-bottom:40px}
+.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:34px auto 40px;max-width:560px;position:relative;z-index:1}
+.tab{min-height:48px;padding:0 26px;border-radius:999px;border:1.5px solid var(--line);background:transparent;font:500 15px 'Playfair',serif;letter-spacing:.14em;text-transform:uppercase;color:var(--choc);cursor:pointer}
+.tab[aria-pressed=true]{background:var(--choc);border-color:var(--choc);color:var(--cream)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 22px;position:relative;z-index:1}
+.card{display:flex;flex-direction:column;align-items:center;text-align:center}
+.card .ph{width:100%;aspect-ratio:4/5;overflow:hidden;border-radius:999px 999px 0 0;background:var(--beige)}
+.card .ph img{width:100%;height:100%;object-fit:cover}
+.card .cat{color:var(--terra);font-size:clamp(28px,4.6vw,38px);line-height:1;margin:10px 0 6px}
+.card h3{font-family:'Kudry',serif;font-weight:400;font-size:clamp(20px,3.4vw,26px);line-height:1.2;margin:0 0 4px;text-wrap:balance}
+.card .price{font-size:clamp(19px,3vw,23px);margin:0 0 14px;white-space:nowrap}
+.want{display:inline-flex;align-items:center;justify-content:center;gap:2px;min-height:52px;width:100%;max-width:260px;border:1.5px solid var(--line);border-radius:999px;text-decoration:none;color:var(--terra);margin-top:auto}
+.want .sloop{font-size:34px;line-height:1}
+.want .kudry{font-size:22px}
+.want:hover{background:rgba(176,92,59,.06)}
+.note{text-align:center;font-size:clamp(18px,2.8vw,22px);margin:40px 0 0;position:relative;z-index:1}
+.facts{text-align:center;font-family:'Open Sans',sans-serif;color:var(--terra);font-size:clamp(14px,2.4vw,18px);margin:24px 0 0;position:relative;z-index:1}
+.facts span{white-space:nowrap}
+.facts .st{display:inline-block;width:.8em;height:1.1em;vertical-align:-.2em;margin:0 .55em;color:#fff;opacity:.8}
 
-/* quote */
-.quote{background:var(--terra);color:var(--paper);text-align:center;padding:clamp(56px,8vw,96px) 0}
-.quote .script{font-size:clamp(40px,6.5vw,76px);display:block}
-.quote .qsub{font-size:clamp(15px,1.8vw,18px);letter-spacing:.14em;text-transform:uppercase;margin:18px 0 0;opacity:.9}
-.star{display:block;margin:0 auto 18px;width:28px;height:28px;color:var(--rose)}
+/* quote band */
+.band{background:var(--terra);color:var(--cream);text-align:center;padding:30px 0 40px;position:relative;z-index:1}
+.band .bigstar{display:block;width:44px;height:72px;margin:4px auto 14px;color:#E9CDBB}
+.band .q{font-size:clamp(34px,7vw,68px);line-height:1.15;margin:0 auto;text-align:center}
+.band .qs{font-family:'Kudry',serif;font-size:clamp(20px,3.4vw,28px);margin:16px auto 0;text-align:center;max-width:20em}
 
 /* steps */
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,40px)}
-.step{text-align:center;padding:8px 10px}
-.step .n{font-style:italic;color:var(--terra);font-size:22px}
-.step h3{font-weight:600;font-size:21px;margin:8px 0 10px}
-.step p{margin:0;color:var(--muted)}
-.paper{background:var(--paper)}
+.steps{position:relative;padding-bottom:30px}
+.how-title{text-align:center;padding-top:clamp(40px,8vw,64px);margin:0;font-size:clamp(46px,9vw,76px);font-weight:400;line-height:1.1}
+.how-title .sloop{font-size:1.35em;line-height:.8;vertical-align:-.08em}
+.step{text-align:center;margin-top:34px;position:relative;z-index:1}
+.step .n{font-family:'Kudry',serif;font-size:clamp(48px,8vw,64px);line-height:1}
+.step h3{font-family:'Sloop',serif;font-weight:400;font-size:clamp(40px,7.4vw,60px);line-height:1.1;margin:4px 0 8px}
+.step p{margin:0 auto;max-width:20em;font-size:clamp(19px,3vw,23px)}
 
 /* faq */
-.faq{max-width:760px;margin:0 auto}
+.faq{position:relative;padding-bottom:40px}
+.faq .title h2{font-size:clamp(40px,8vw,68px)}
+.qa{max-width:640px;margin:28px auto 0;position:relative;z-index:1}
 details{border-bottom:1px solid var(--line)}
-summary{cursor:pointer;list-style:none;padding:22px 48px 22px 0;font-size:19px;position:relative}
+summary{cursor:pointer;list-style:none;padding:20px 44px 20px 0;font-size:clamp(19px,3vw,22px);position:relative}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:28px;color:var(--terra);font-weight:300}
+summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:30px;color:var(--terra);font-weight:300}
 details[open] summary::after{content:"–"}
-details p{margin:0 0 22px;color:var(--muted)}
+details p{margin:0 0 20px;font-size:18px}
+.arch{position:relative;z-index:1;margin:44px auto 0;width:min(620px,86%);aspect-ratio:4/5;border-radius:999px 999px 0 0;overflow:hidden;background:var(--beige)}
+.arch img{width:100%;height:100%;object-fit:cover}
+.arch .wm{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);width:28%;height:auto}
 
 /* contacts */
-.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
-.contact .ph{aspect-ratio:4/5;border-radius:999px 999px 4px 4px;overflow:hidden;background:var(--rose-soft)}
-.contact .ph img{width:100%;height:100%;object-fit:cover}
-.contact .title{text-align:left;margin-bottom:20px}
-.contact .title .script{left:-8px;transform:rotate(-4deg)}
-.slogan{color:var(--terra);font-size:clamp(42px,5.4vw,64px);margin:0;line-height:1.1;font-weight:400}
-@media(max-width:900px){.slogan,.contacts-h,.contact-note{text-align:center}.contact .btn{display:flex;width:max-content;margin:0 auto}}
-.hy{font-family:'Playfair',serif;font-size:.6em;vertical-align:.2em}
-.contact .title p{margin-left:0}
-.contacts-h{font-size:clamp(26px,3vw,32px);margin:22px 0 14px}
-.contact-note{color:var(--muted);margin:0 0 22px}
-.links{list-style:none;margin:0 0 32px;padding:0;border-top:1px solid var(--line)}
-.links a{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none}
-.links span:first-child{font-weight:600}
-.links span:last-child{color:var(--muted);font-style:italic;white-space:nowrap}
-.links a:hover span:last-child{color:var(--terra)}
-footer{text-align:center;padding:40px 0 110px;color:var(--muted);font-size:14px}
-footer img{height:44px;width:auto;margin:0 auto 12px;opacity:.85}
-
+.contacts{padding:44px 0 70px;position:relative}
+.slogan{color:var(--terra);text-align:center;font-size:clamp(42px,8vw,72px);line-height:1.1;margin:0}
+.contacts h2{text-align:center;font-family:'Kudry',serif;font-weight:400;font-size:clamp(44px,8.6vw,72px);margin:18px 0 26px}
+.links{list-style:none;margin:0 auto;padding:0;max-width:560px}
+.links a{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:12px 0;text-decoration:none;font-size:clamp(24px,4.2vw,32px)}
+.links .v{font-style:italic;color:var(--terra);font-size:16px;white-space:nowrap}
+.links a:hover .l{color:var(--terra)}
+.contact-note{font-family:'Kudry',serif;text-align:center;font-size:clamp(20px,3.4vw,26px);margin:34px auto 0;max-width:24em}
+footer{text-align:center;padding:10px 20px 40px}
+.fcap{margin:12px 0 0;font-size:17px}
 .mobile-cta{display:none}
-@media(max-width:900px){
-  nav{display:none}
-  .bar .btn{margin-left:auto}
-  .contact{grid-template-columns:minmax(0,1fr)}
-  .contact .ph{max-width:420px;width:100%;margin:0 auto}
-  .contact .title{text-align:center}
-  .contact .title .script{left:50%;transform:translateX(-50%) rotate(-4deg)}
-  .steps{grid-template-columns:minmax(0,1fr)}
-}
-@media(max-width:600px){
-  body{font-size:16px}
-  .bar .btn{display:none}
-  .mobile-cta{display:flex;position:fixed;left:14px;right:14px;bottom:14px;z-index:30}
-  .mobile-cta .btn{flex:1;box-shadow:0 12px 30px -10px rgba(59,42,34,.6)}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .card{padding:8px 8px 16px}
-  .card .cat{font-size:20px;margin-top:10px}
-  .card h3{font-size:15px}
-  .card .price{font-size:16px;margin-bottom:12px}
-  .card .btn{padding:0 14px;font-size:11px;min-height:40px}
-  .hero-in{padding:110px 16px 104px}
+@media(max-width:600px){footer{padding-bottom:110px}.mobile-cta{display:flex;position:fixed;left:14px;right:14px;bottom:14px;z-index:30}.mobile-cta .btn{flex:1;box-shadow:0 12px 30px -10px rgba(59,32,22,.55)}}
+footer img{width:110px;height:auto;margin:0 auto;opacity:.9}
+
+@media(max-width:420px){
+  .grid{gap:28px 14px}
+  .want{min-height:46px}
+  .want .sloop{font-size:28px}.want .kudry{font-size:18px}
+  .tab{padding:0 18px;font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* gif-like hand-drawn sparkles */
+.spark svg .f{opacity:0;animation:frame .75s steps(1,end) infinite}
+.spark svg .f2{animation-delay:-.25s}.spark svg .f3{animation-delay:-.5s}
+@keyframes frame{0%{opacity:1}33.33%,100%{opacity:0}}
+.spark svg{animation:hop 1.5s steps(1,end) infinite}
+@keyframes hop{0%{transform:scale(1) rotate(0)}25%{transform:scale(.92) rotate(-4deg)}50%{transform:scale(1.04) rotate(3deg)}75%{transform:scale(.96) rotate(-1deg)}}
+.spark .dot{animation:pop 1.2s steps(1,end) infinite}
+@keyframes pop{0%,49%{opacity:1}50%,100%{opacity:0}}
+.band .bigstar,.facts .st{animation:hop 1.5s steps(1,end) infinite}
+.gif{position:absolute;pointer-events:none;z-index:0;color:#fff}
+.gif svg{display:block;width:100%;height:100%;overflow:visible}
+.gif .ray{opacity:0;animation:burst 1.6s steps(1,end) infinite}
+@keyframes burst{0%,12%{opacity:0}13%,40%{opacity:1}41%,100%{opacity:0}}
+.gif .core{animation:hop 1s steps(1,end) infinite;transform-origin:50% 50%;transform-box:fill-box}
+.mini{position:absolute;pointer-events:none;z-index:0;color:#fff;font-size:0}
+.mini svg{display:block;width:100%;height:100%;animation:pop var(--d,1.4s) steps(1,end) var(--w,0s) infinite}
+@media(prefers-reduced-motion:reduce){.spark svg,.spark svg .f,.spark .dot,.gif .ray,.gif .core,.mini svg{animation:none!important}.spark svg .f1{opacity:1}}
+
+
 </style>
 </head>
 <body>
 
-<header id="hdr">
-  <div class="wrap bar">
-    <a class="logo" href="#top" aria-label="Миг — на главную">
-      <img class="light" src="assets/logo-cream.png" alt="Миг">
-      <img class="dark" src="assets/logo-ink.png" alt="Миг">
-    </a>
-    <nav aria-label="Разделы">
-      <a href="#catalog">Каталог</a>
-      <a href="#how">Как заказать</a>
-      <a href="#faq">Вопросы</a>
-      <a href="#contacts">Контакты</a>
-    </nav>
-    <a class="btn btn-terra" href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener">Заказать</a>
-  </div>
-</header>
-
-<main id="top">
+<main>
 <section class="hero">
   <img class="bg" src="assets/hero.jpg" alt="">
-  <div class="hero-in">
-    <h1 class="sub">Студия воздушных шаров «Миг» · Сургут</h1>
-    <p class="tag script">Один миг, одно «Ах!»</p>
-    <ul class="facts">
-      <li>Доставка по городу 350 ₽</li>
-      <li>Самовывоз — Тюменский тракт, 19</li>
-      <li>Соберём по вашему фото</li>
-    </ul>
-    <div class="actions">
-      <a class="btn btn-terra" href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener">Заказать в Telegram</a>
-      <a class="btn btn-ghost" href="https://max.ru/u/f9LHodD0cOKgaP4e9e8k9xX963mML27AJpYQYxJyFJjjtJn_wBX1dm_d0uQ" target="_blank" rel="noopener">Написать в MAX</a>
-    </div>
+  <div class="hero-top"><img src="assets/logo-cream.png" alt="Миг"></div>
+  <div class="hero-bottom">
+    <h1>студия воздушных шаров<span class="dot">✦</span>Сургут</h1>
+    <p class="tag sloop">Один миг, одно «Ах!»</p>
+    <a class="btn btn-terra" href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener">Заказать в Telegram</a>
+    <a class="btn btn-ghost" href="https://max.ru/se14687170_bot" target="_blank" rel="noopener">Написать в MAX</a>
   </div>
-  <svg class="torn" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 22 L40 18 L85 26 L130 15 L180 24 L230 17 L275 27 L330 14 L380 23 L425 16 L470 25 L520 12 L575 22 L620 18 L670 27 L720 15 L770 23 L815 17 L860 26 L910 13 L960 22 L1005 18 L1055 27 L1100 14 L1150 24 L1200 16 L1245 25 L1295 15 L1345 23 L1390 17 L1440 24 L1440 40 L0 40 Z"/></svg>
 </section>
+<div class="scal-top" style="--c:var(--pink)"></div>
 
-<section class="band" id="catalog">
+<section class="catalog" id="catalog">
   <div class="wrap">
+    <span class="spark" style="left:-10px;top:240px;width:120px;height:140px" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg></span>
+    <span class="spark" style="right:-6px;top:320px;width:84px;height:100px" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg></span>
     <div class="title">
-      <span class="script" aria-hidden="true">наборы</span>
-      <h2 class="caps">Каталог</h2>
-      <p>Готовые наборы под любой повод. Цвета и надписи можно изменить — напишите об этом в заявке.</p>
+      <span class="bgw sloop" aria-hidden="true">Готовые наборы</span>
+      <h2 class="kudry">КАТАЛОГ</h2>
     </div>
+    <p class="lead">цвета и надписи можно изменить —<br>напишите об этом в заявке</p>
     <div class="tabs" role="group" aria-label="Разделы каталога" id="tabs"></div>
     <div class="grid" id="grid"></div>
-    <p class="note">Цена указана за набор, без доставки. Минимальная сумма заказа — 2 000 ₽.</p>
+    <p class="note">Цена указана за набор без учёта доставки.<br>Минимальная сумма для заказа — 2 000 ₽</p>
+    <p class="facts"><span>Доставка по городу 350 ₽</span><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg><span>Самовывоз Тюменский тракт, 19</span></p>
   </div>
 </section>
 
-<section class="quote">
+<div class="scal-top" style="--c:var(--terra)"></div>
+<section class="band">
   <div class="wrap">
-    <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0c.6 6.2 2.2 9.6 12 12-9.8 2.4-11.4 5.8-12 12-.6-6.2-2.2-9.6-12-12 9.8-2.4 11.4-5.8 12-12z"/></svg>
-    <span class="script">В наших руках чья<span class="hy">-</span>то мечта</span>
-    <p class="qsub">Поэтому мы собираем каждый набор бережно</p>
+    <svg class="bigstar" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg>
+    <p class="q sloop">В наших руках чья<span class="hy">-</span>то мечта</p>
+    <p class="qs">поэтому мы собираем каждый заказ бережно</p>
+  </div>
+</section>
+<div class="scal-bottom" style="--c:var(--terra)"></div>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <span class="spark" style="right:4%;top:40px;width:80px;height:96px" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg></span>
+    <span class="spark" style="left:6%;top:56%;width:100px;height:120px" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg></span>
+    <h2 class="how-title"><span class="sloop">К</span><span class="kudry">ак заказать</span></h2>
+    <div class="step"><div class="n">1</div><h3>Выберите набор</h3><p>из каталога или пришлите фото — соберём похожий</p></div>
+    <div class="step"><div class="n">2</div><h3>Оставьте заявку</h3><p>бот спросит дату, адрес и пожелания. Лучше заказывать за 2–3 дня</p></div>
+    <div class="step"><div class="n">3</div><h3>Внесите предоплату</h3><p>50% фиксируют дату — привезём ко времени или подготовим к самовывозу</p></div>
   </div>
 </section>
 
-<section class="band paper" id="how">
+<section class="faq" id="faq">
   <div class="wrap">
+    <span class="spark" style="left:2%;top:70px;width:90px;height:110px" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg></span>
+    <span class="spark" style="right:2%;top:420px;width:110px;height:130px" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C12.5 9 13.8 11 19 12 13.8 13 12.5 15 12 24 11.5 15 10.2 13 5 12 10.2 11 11.5 9 12 0Z"/></svg></span>
     <div class="title">
-      <span class="script" aria-hidden="true">просто</span>
-      <h2 class="caps">Как заказать</h2>
+      <span class="bgw sloop" aria-hidden="true">Ответы</span>
+      <h2 class="kudry">частые вопросы</h2>
     </div>
-    <div class="steps">
-      <div class="step"><span class="n">(1)</span><h3>Выберите набор</h3><p>Из каталога или пришлите фото-пример — подберём похожий.</p></div>
-      <div class="step"><span class="n">(2)</span><h3>Оставьте заявку</h3><p>Бот спросит дату, адрес и пожелания. Лучше заказывать за 2–3 дня.</p></div>
-      <div class="step"><span class="n">(3)</span><h3>Внесите предоплату</h3><p>50% фиксируют дату. Привезём к нужному времени или подготовим к самовывозу.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="faq">
-  <div class="wrap">
-    <div class="title">
-      <span class="script" aria-hidden="true">ответы</span>
-      <h2 class="caps">Частые вопросы</h2>
-    </div>
-    <div class="faq">
+    <div class="qa">
       <details><summary>Сколько держатся шары?</summary><p>От 5 дней — зависит от сезона.</p></details>
       <details><summary>Можно сделать по моему фото?</summary><p>Да, пришлите пример в заявке.</p></details>
       <details><summary>Берёте срочные заказы?</summary><p>В зависимости от сложности и наличия шаров — напишите, проверим.</p></details>
       <details><summary>Можно перенести дату или вернуть предоплату?</summary><p>Дату перенести можно. Предоплата не возвращается, но остаётся на будущие заказы.</p></details>
       <details><summary>Есть минимальная сумма заказа?</summary><p>Да, от 2 000 ₽.</p></details>
     </div>
+    <div class="arch">
+      <img loading="lazy" src="https://drive.google.com/thumbnail?id=1eD-U04vRjs6-GWEPbtzc_evDj0LIOsQu&amp;sz=w1200" alt="Набор «Первый зубик»">
+      <img class="wm" src="assets/logo-cream.png" alt="">
+    </div>
   </div>
 </section>
 
-<section class="band paper" id="contacts">
-  <div class="wrap contact">
-    <div class="ph"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1P_9KkfGKSwx5YlUNUHGIzg9FFUTCePzR&amp;sz=w1000" alt="Набор «Нежный»"></div>
-    <div>
-      <h2 class="script slogan">Бережно соберём ваш праздник</h2>
-      <h3 class="caps contacts-h">Контакты</h3>
-      <ul class="links">
-        <li><a href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener"><span>Заявка</span><span>@mig_sgt_bot</span></a></li>
-        <li><a href="https://max.ru/u/f9LHodD0cOKgaP4e9e8k9xX963mML27AJpYQYxJyFJjjtJn_wBX1dm_d0uQ" target="_blank" rel="noopener"><span>MAX</span><span>написать</span></a></li>
-        <li><a href="https://www.instagram.com/mig.sgt" target="_blank" rel="noopener"><span>Instagram</span><span>mig.sgt</span></a></li>
-        <li><a href="tel:+79825956613"><span>Телефон</span><span>8 982 595-66-13</span></a></li>
-      </ul>
-      <p class="contact-note">Оставьте заявку в боте — менеджер свяжется с вами в течение дня.</p>
-      <a class="btn btn-terra" href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener">Оставить заявку</a>
-    </div>
+<section class="contacts" id="contacts">
+  <div class="wrap">
+    <h2 class="slogan sloop" style="font-family:'Sloop',serif;color:var(--terra)">Бережно соберём ваш праздник</h2>
+    <h2>Контакты</h2>
+    <ul class="links">
+      <li><a href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener"><span class="l">Помощник в TG</span><span class="v">@mig_sgt_bot</span></a></li>
+      <li><a href="https://max.ru/se14687170_bot" target="_blank" rel="noopener"><span class="l">Помощник в MAX</span><span class="v">написать</span></a></li>
+      <li><a href="https://www.instagram.com/mig.sgt" target="_blank" rel="noopener"><span class="l">Instagram</span><span class="v">mig.sgt</span></a></li>
+      <li><a href="tel:+79825956613"><span class="l">Телефон</span><span class="v">8 982 595-66-13</span></a></li>
+    </ul>
+    <p class="contact-note">Оставьте заявку с помощью бота — мы свяжемся с вами в течение дня</p>
+    <p class="center" style="margin:26px 0 0"><a class="btn btn-terra" href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener">Оставить заявку</a></p>
   </div>
 </section>
 </main>
 
-<footer>
-  <img src="assets/logo-terra.png" alt="Миг">
-  Студия воздушных шаров «Миг» · Сургут
-</footer>
+<footer><img src="assets/logo-terra.png" alt="Миг"><p class="fcap">Студия воздушных шаров «Миг» · Сургут</p></footer>
 
-<div class="mobile-cta">
-  <a class="btn btn-terra" href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener">Заказать в Telegram</a>
-</div>
+<div class="mobile-cta"><a class="btn btn-terra" href="https://t.me/mig_sgt_bot" target="_blank" rel="noopener">Заказать в Telegram</a></div>
 
 <script>
 {
@@ -310,10 +291,10 @@ footer img{height:44px;width:auto;margin:0 auto 12px;opacity:.85}
     grid.innerHTML = list.map(i =>
       '<article class="card">' +
         '<div class="ph"><img loading="lazy" src="' + img(i.id) + '" alt="' + esc(i.name) + '"></div>' +
-        '<p class="cat">' + esc(i.cat.toLowerCase()) + '</p>' +
+        '<p class="cat sloop">' + esc(i.cat.toLowerCase()) + '</p>' +
         '<h3>' + esc(i.name) + '</h3>' +
-        '<p class="price" style="margin-top:0">' + rub(i.price) + '</p>' +
-        '<a class="btn" href="' + BOT + '" target="_blank" rel="noopener">Хочу такой</a>' +
+        '<p class="price">' + rub(i.price) + '</p>' +
+        '<a class="want" href="' + BOT + '" target="_blank" rel="noopener"><span class="sloop">Х</span><span class="kudry">очу такой</span></a>' +
       '</article>'
     ).join('');
   }
@@ -324,11 +305,44 @@ footer img{height:44px;width:auto;margin:0 auto 12px;opacity:.85}
     renderTabs(); renderGrid();
   });
   renderTabs(); renderGrid();
+}
+</script>
 
-  const hdr = document.getElementById('hdr');
-  const onScroll = () => hdr.classList.toggle('solid', window.scrollY > window.innerHeight * 0.6);
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+
+<script>
+{
+  const base=[[12,0],[12.5,9,13.8,11,19,12],[13.8,13,12.5,15,12,24],[11.5,15,10.2,13,5,12],[10.2,11,11.5,9,12,0]];
+  const j=(v,a)=>(v+(Math.random()-.5)*a).toFixed(2);
+  const wob=a=>{let d='M'+j(base[0][0],a)+' '+j(base[0][1],a*.5);for(let i=1;i<5;i++){const s=base[i];d+='C'+j(s[0],a)+' '+j(s[1],a)+' '+j(s[2],a)+' '+j(s[3],a)+' '+j(s[4],a*.6)+' '+j(s[5],a*.6);}return d+'Z';};
+  const rnd=(a,b)=>a+Math.random()*(b-a);
+  // big stars: 3 hand-drawn frames + blinking dots, like a sticker gif
+  document.querySelectorAll('.spark').forEach((s,i)=>{
+    const v=s.querySelector('svg'); if(!v) return;
+    v.setAttribute('viewBox','-4 -4 32 32'); v.style.overflow='visible';
+    let g='';
+    for(let k=1;k<=3;k++) g+='<path class="f f'+k+'" fill="currentColor" d="'+wob(1.3)+'"/>';
+    for(let k=0;k<4;k++){const a=rnd(0,6.28),r=rnd(11,15);g+='<circle class="dot" style="animation-delay:-'+rnd(0,1.2).toFixed(2)+'s" cx="'+(12+Math.cos(a)*r).toFixed(1)+'" cy="'+(12+Math.sin(a)*r).toFixed(1)+'" r="'+rnd(.5,1).toFixed(2)+'" fill="currentColor"/>';}
+    v.innerHTML=g;
+    v.style.animationDelay='-'+(i*.37%1.5).toFixed(2)+'s';
+  });
+  // sections that hold stars get extra bursts and minis
+  const hosts=[...new Set([...document.querySelectorAll('.spark')].map(s=>s.parentElement))];
+  const star4='M12 2C12.6 9 15 11.4 22 12 15 12.6 12.6 15 12 22 11.4 15 9 12.6 2 12 9 11.4 11.4 9 12 2Z';
+  hosts.forEach(host=>{
+    if(getComputedStyle(host).position==='static') host.style.position='relative';
+    for(let k=0;k<2;k++){ // burst: small star + rays that flash
+      const b=document.createElement('span'); b.className='gif'; b.setAttribute('aria-hidden','true');
+      const sz=rnd(34,52); b.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+rnd(6,88)+'%;top:'+rnd(8,85)+'%;opacity:.75';
+      let g='<path class="core" fill="currentColor" d="'+star4+'"/>';
+      for(let r=0;r<8;r++){const a=r*Math.PI/4+rnd(-.2,.2),r1=rnd(13,15),r2=rnd(17,21);g+='<line class="ray" style="animation-delay:-'+(k*.8)+'s" x1="'+(12+Math.cos(a)*r1).toFixed(1)+'" y1="'+(12+Math.sin(a)*r1).toFixed(1)+'" x2="'+(12+Math.cos(a)*r2).toFixed(1)+'" y2="'+(12+Math.sin(a)*r2).toFixed(1)+'" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>';}
+      b.innerHTML='<svg viewBox="0 0 24 24">'+g+'</svg>'; host.appendChild(b);
+    }
+    for(let k=0;k<7;k++){ // tiny blinking stars
+      const m=document.createElement('span'); m.className='mini'; m.setAttribute('aria-hidden','true');
+      const sz=rnd(7,15); m.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+rnd(3,95)+'%;top:'+rnd(3,94)+'%;opacity:.8;--d:'+rnd(.9,1.8).toFixed(2)+'s;--w:-'+rnd(0,1.8).toFixed(2)+'s';
+      m.innerHTML='<svg viewBox="0 0 24 24"><path fill="currentColor" d="'+wob(.8)+'"/></svg>'; host.appendChild(m);
+    }
+  });
 }
 </script>
 </body>
